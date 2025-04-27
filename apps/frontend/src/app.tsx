@@ -9,11 +9,13 @@ import { buttonVariants } from "./components/ui/button";
 import Home from "./components/pages/home";
 import { cn } from "./lib/utils";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Appointments from "./components/pages/appointments";
 
 const queryClient = new QueryClient();
 
 const navConfig = [
   { name: "Home", to: "/", Component: Home },
+  { name: "Appointments", to: "/appointments", Component: Appointments },
   { name: "Reports", to: "/reports", Component: Reports },
 ];
 
@@ -39,7 +41,7 @@ function App() {
             ))}
           </nav>
         </header>
-        <main className="h-full w-full grow">
+        <main className="flex w-full grow flex-col">
           <Routes>
             {navConfig.map(({ to, Component }) => (
               <Route path={to} element={<Component />} />

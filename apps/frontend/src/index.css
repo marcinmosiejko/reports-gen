@@ -116,16 +116,14 @@
   }
 
   html {
-    height: 100%;
+    scrollbar-gutter: stable both-edges;
   }
 
   body {
     @apply bg-background text-foreground;
-    height: 100%;
   }
 
   #root {
     @apply flex min-h-screen flex-col;
-    height: 100%;
   }
 }
