@@ -1,0 +1,12 @@
+{
+  "name": "reports",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
