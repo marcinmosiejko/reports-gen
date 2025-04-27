@@ -33,7 +33,7 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
 (async () => {
   await dbInit();
   app.listen(port, () => {
-    console.log(`API listening on port: ${port}`);
+    console.log(`Server listening on port: ${port}`);
   });
   startWorker();
 })();

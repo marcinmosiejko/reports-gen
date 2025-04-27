@@ -1,5 +1,5 @@
 {
-  "name": "reports",
+  "name": "reports-gen",
   "private": true,
   "version": "1.0.0",
   "workspaces": [
