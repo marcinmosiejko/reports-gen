@@ -11,6 +11,7 @@ import type { AppointmentApi } from "common";
 import { PageTitle } from "../page-title";
 import { useState } from "react";
 import { TablePagination } from "../table-pagination";
+import { SERVER_HOST } from "@/constants";
 
 const isDev = import.meta.env.MODE === "development";
 const dateFormatOptions: Intl.DateTimeFormatOptions = {
@@ -71,7 +72,7 @@ const FetchAppointments = () => {
   const { isLoading, error, data } = useQuery<AppointmentApi[]>({
     queryKey: ["appointments"],
     queryFn: () =>
-      fetch("http://localhost:3001/appointments").then((res) => res.json()),
+      fetch(`${SERVER_HOST}/appointments`).then((res) => res.json()),
   });
 
   const [pagination, setPagination] = useState({

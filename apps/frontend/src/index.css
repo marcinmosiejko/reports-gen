@@ -126,4 +126,12 @@
   #root {
     @apply flex min-h-screen flex-col;
   }
+
+  /* Temporary dirty fix for Sonner toast clipping on small screens */
+  [data-sonner-toast] {
+    right: 16px !important;
+    left: auto !important;
+    max-width: 90vw !important;
+    box-sizing: border-box;
+  }
 }

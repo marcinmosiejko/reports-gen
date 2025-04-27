@@ -4,18 +4,24 @@ import { Db } from "mongodb";
 import { Appointment } from "types";
 
 export async function seedDatabase(db: Db) {
-  const { owners, clinics, voicebots, appointments } = getCollections(db);
+  const { owners, clinics, voicebots, appointments, reportJobs } =
+    getCollections(db);
 
   await clinics.createIndex({ ownerId: 1 });
   await appointments.createIndex({ clinicId: 1 });
   await appointments.createIndex({ voicebotId: 1 });
   await voicebots.createIndex({ clinicId: 1 });
 
+  await reportJobs.createIndex({ ownerId: 1 });
+  await reportJobs.createIndex({ "filters.voicebotId": 1 });
+  await reportJobs.createIndex({ "filters.clinicId": 1 });
+
   await Promise.all([
     owners.deleteMany({}),
     clinics.deleteMany({}),
     voicebots.deleteMany({}),
     appointments.deleteMany({}),
+    reportJobs.deleteMany({}),
   ]);
 
   const ownerDocs = Array.from({ length: 5 }, () => ({

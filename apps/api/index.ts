@@ -4,6 +4,8 @@ import { dbInit } from "./db";
 import appointmentsRouter from "./routes/appointments";
 import clinicsRouter from "./routes/clinics";
 import voicebotsRouter from "./routes/voicebots";
+import reportsRouter from "./routes/reports";
+import { startWorker } from "./worker";
 
 const app = express();
 const port = 3001;
@@ -18,6 +20,7 @@ app.get("/", (_req: Request, res: Response) => {
 app.use("/appointments", appointmentsRouter);
 app.use("/clinics", clinicsRouter);
 app.use("/voicebots", voicebotsRouter);
+app.use("/reports", reportsRouter);
 
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
   console.error(err);
@@ -32,4 +35,5 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
   app.listen(port, () => {
     console.log(`API listening on port: ${port}`);
   });
+  startWorker();
 })();

@@ -12,10 +12,12 @@
   "dependencies": {
     "@faker-js/faker": "^9.7.0",
     "cors": "^2.8.5",
+    "csv": "^6.3.11",
     "express": "^5.1.0",
     "http-errors": "^2.0.0",
     "mongodb": "^6.16.0",
-    "mongodb-memory-server": "^10.1.4"
+    "mongodb-memory-server": "^10.1.4",
+    "zod": "^3.24.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
@@ -24,5 +26,8 @@
     "@types/node": "^22.15.2",
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2"
+  },
+  "ts-node": {
+    "esm": true
   }
 }

@@ -35,3 +35,26 @@ export type Appointment = {
   };
   createdAt: string | Date;
 };
+
+export enum JobStatus {
+  Pending = "pending",
+  Processing = "processing",
+  Completed = "completed",
+  Failed = "failed",
+  Deleted = "deleted",
+}
+
+export type ReportJob = {
+  _id?: ObjectId;
+  ownerId: ObjectId;
+  status: JobStatus;
+  reportPath?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  filters: {
+    voicebotId?: ObjectId;
+    clinicId?: ObjectId;
+    startDate: Date;
+    endDate: Date;
+  };
+};

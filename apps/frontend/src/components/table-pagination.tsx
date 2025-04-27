@@ -20,7 +20,7 @@ export function TablePagination({
   return (
     <div className="mb-4 flex items-center justify-end gap-2">
       <span className="text-muted-foreground text-sm">
-        Page {page} of {pageCount}
+        Page {page} of {pageCount || 1}
       </span>
       <Button
         size="sm"

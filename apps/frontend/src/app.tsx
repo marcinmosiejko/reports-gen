@@ -10,6 +10,8 @@ import Home from "./components/pages/home";
 import { cn } from "./lib/utils";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Appointments from "./components/pages/appointments";
+import { Toaster } from "sonner";
+import { useReportUpdates } from "./lib/hooks";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +22,8 @@ const navConfig = [
 ];
 
 function App() {
+  useReportUpdates(queryClient);
+
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
@@ -44,7 +48,7 @@ function App() {
         <main className="flex w-full grow flex-col">
           <Routes>
             {navConfig.map(({ to, Component }) => (
-              <Route path={to} element={<Component />} />
+              <Route key={to} path={to} element={<Component />} />
             ))}
           </Routes>
         </main>
@@ -52,6 +56,7 @@ function App() {
           foooooooter
         </footer>
       </Router>
+      <Toaster richColors closeButton position="top-right" />
     </QueryClientProvider>
   );
 }

@@ -1,6 +1,6 @@
 import { MongoMemoryServer } from "mongodb-memory-server";
 import { MongoClient, Db, Collection } from "mongodb";
-import { Appointment, Clinic, Owner, Voicebot } from "types";
+import { Appointment, Clinic, Owner, ReportJob, Voicebot } from "types";
 import { seedDatabase } from "./utils/seedDb";
 
 type DatabaseCollections = {
@@ -8,6 +8,7 @@ type DatabaseCollections = {
   clinics: Collection<Clinic>;
   voicebots: Collection<Voicebot>;
   appointments: Collection<Appointment>;
+  reportJobs: Collection<ReportJob>;
 };
 
 export function getCollections(db: Db): DatabaseCollections {
@@ -16,6 +17,7 @@ export function getCollections(db: Db): DatabaseCollections {
     clinics: db.collection<Clinic>("clinics"),
     voicebots: db.collection<Voicebot>("voicebots"),
     appointments: db.collection<Appointment>("appointments"),
+    reportJobs: db.collection<ReportJob>("reportJobs"),
   };
 }
 

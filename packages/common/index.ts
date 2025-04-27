@@ -39,3 +39,28 @@ export type ClinicApi = {
   address: string;
   ownerId: string;
 };
+
+export enum JobStatus {
+  Pending = "pending",
+  Processing = "processing",
+  Completed = "completed",
+  Failed = "failed",
+  Deleted = "deleted",
+}
+
+export type ReportJobApi = {
+  _id: string;
+  ownerId: string;
+  status: JobStatus;
+  reportPath?: string;
+  createdAt: string | Date;
+  updatedAt: string | Date;
+  filters: {
+    voicebotId?: string;
+    clinicId?: string;
+    voicebotName?: string;
+    clinicName?: string;
+    startDate: string | Date;
+    endDate: string | Date;
+  };
+};
