@@ -1,81 +1,109 @@
+# Reports Generation MVP
+
+This project is a minimal proof-of-concept (MVP) for a reports generation flow between frontend and backend. Users can schedule reports and receive notifications via **Server-Sent Events** (SSE) when reports are ready — even when navigating between pages.
+
+---
+
+## Notes
+
+- The MVP focuses on demonstrating ux flow over clean code and production readiness.
+- Validation, error handling, authentication and types are minimal or missing.
+- Database models use simplified or incomplete schemas.
+- The worker process and file storage are intentionally very basic.
+- The appointments view would typically use server-side pagination; here, a basic query was implemented mainly to add another page and practice MongoDB querying.
+
+---
+
 ## Run The App Locally
 
-This guide will walk you through the steps to set up and run the application on your local machine for development or testing purposes. This project uses **pnpm** for package management and workspace filtering.
+This guide will walk you through the steps to set up and run the application on your local machine for development or testing purposes.  
+The project uses **pnpm** for package management and workspace filtering.
 
-**Prerequisites:**
+### Prerequisites
 
 Before you begin, ensure you have the following installed:
 
-- [Node.js](https://nodejs.js.org/)
+- [Node.js](https://nodejs.org/)
 - [Git](https://git-scm.com/)
-- **pnpm:** If you don't have pnpm installed, you can install it globally using npm:
+- [pnpm](https://pnpm.io/): If you don't have pnpm installed, you can install it globally:
+
   ```sh
   npm install -g pnpm
   ```
 
-**Steps:**
+---
 
-1.  **Clone the repository:**
+### Steps
 
-    Open your terminal or command prompt and clone the project repository using Git. You can use either the HTTPS or SSH protocol:
+#### 1. Clone the repository
 
-    **Using HTTPS (recommended for most users):**
+Open your terminal or command prompt and clone the project repository using Git.
 
-    ```sh
-    git clone https://github.com/marcin_mosiejko/reports-gen
-    ```
+**Using HTTPS (recommended for most users):**
 
-    **Using SSH (requires SSH key setup with GitHub):**
+```sh
+git clone https://github.com/marcinmosiejko/reports-gen.git
+```
 
-    ```sh
-    git clone git@github.com:marcinmosiejko/reports-gen.git
-    ```
+**Using SSH (requires SSH key setup with GitHub):**
 
-    Both commands will download the project files into a new directory named `reports-gen` on your computer. Choose the method that is appropriate for your setup.
+```sh
+git clone git@github.com:marcinmosiejko/reports-gen.git
+```
 
-2.  **Navigate to the project directory:**
+Both commands will download the project files into a new directory named `reports-gen`.
 
-    Change your current directory to the cloned repository:
+---
 
-    ```sh
-    cd reports-gen
-    ```
+#### 2. Navigate to the project directory
 
-3.  **Install packages:**
+```sh
+cd reports-gen
+```
 
-    Install the necessary dependencies for the entire project and its individual workspaces (server and frontend) using **pnpm**:
+---
 
-    ```sh
-    pnpm install
-    ```
+#### 3. Install packages
 
-    This command installs dependencies for all workspaces defined in the project's `pnpm-workspace.yaml` file. **Unlike npm, you typically only need to run `pnpm install` once at the root of the project.** pnpm efficiently links dependencies across workspaces.
+Install the necessary dependencies for the entire project and its individual workspaces:
 
-4.  **Run the application:**
+```sh
+pnpm install
+```
 
-    You will need to run the backend and frontend development servers in **separate terminal windows, tabs, or processes** to have both running concurrently.
+This command installs dependencies for all workspaces defined in the `pnpm-workspace.yaml` file.
 
-    In one terminal window, run the backend server using **pnpm**:
+✅ **Note:** Unlike npm, you typically only need to run `pnpm install` once at the project root — pnpm efficiently links dependencies across workspaces.
 
-    ```sh
-    pnpm --filter server run dev
-    ```
+---
 
-    This command uses pnpm's `--filter` flag to target the `server` workspace and run its `dev` script.
+#### 4. Run the application
 
-    In a separate terminal window, run the frontend server using **pnpm**:
+You need to run the backend and frontend development servers in **separate terminal windows, tabs, or processes**.
 
-    ```sh
-    pnpm --filter frontend run dev
-    ```
+**In one terminal window: run the backend server**
 
-    This command uses pnpm's `--filter` flag to target the `frontend` workspace and run its `dev` script.
+```sh
+pnpm --filter server run dev
+```
 
-After running these commands in their respective terminals, you should see output indicating that the development servers are running. The frontend application should be accessible in your web browser at the address specified by the frontend development server (often `http://localhost:3000` or similar).
+This starts the Express.js server for handling API requests.
 
-**Troubleshooting:**
+**In another terminal window: run the frontend server**
 
-- If you encounter errors during installation, ensure you have **pnpm** installed correctly.
-- If you chose the SSH clone method and encounter issues, verify your SSH key setup with GitHub.
-- Try deleting the `node_modules` folders (if they exist) and the `pnpm-lock.yaml` file at the root of the project and running `pnpm install` again.
-- Ensure you have the correct Node.js version installed if specified in the project's documentation or `package.json`.
+```sh
+pnpm --filter frontend run dev
+```
+
+This starts the React development server.
+
+After both are running, you can access the frontend application at `http://localhost:3000` (or whichever port is shown).
+
+---
+
+### Troubleshooting
+
+- Ensure **pnpm** is installed correctly.
+- If cloning using SSH fails, verify your SSH key configuration with GitHub.
+- If you encounter dependency issues, try deleting the `node_modules` folder and `pnpm-lock.yaml` file, then run `pnpm install` again.
+- Check that your Node.js version matches the version specified in the project (if applicable).
