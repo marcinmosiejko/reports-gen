@@ -39,7 +39,6 @@ const reportJobchema = z.object({
 router.post(
   "/",
   asyncHandler(async (req: Request, res: Response) => {
-    console.log("Scheduling job...");
     try {
       const { voicebotId, clinicId, startDate, endDate } = reportJobchema.parse(
         req.body
@@ -68,7 +67,9 @@ router.post(
 
       const result = await db.reportJobs.insertOne(newJob);
 
-      res.status(201).json({
+      const jobStatusUrl = `/reports/${result.insertedId}`;
+
+      res.status(202).location(jobStatusUrl).json({
         message: "Job scheduled successfully",
         jobId: result.insertedId,
       });
