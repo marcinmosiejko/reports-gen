@@ -13,7 +13,7 @@ router.get(
       const db = getDb();
       const ownerId = await getOwnerId();
       const clinics = await db.clinics.find({ ownerId }).toArray();
-      res.status(200).json(clinics);
+      res.status(200).json({ data: clinics });
     } catch (err: any) {
       throw createError(500, "Error fetching clinics");
     }

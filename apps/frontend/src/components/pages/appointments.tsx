@@ -72,7 +72,13 @@ const FetchAppointments = () => {
   const { isLoading, error, data } = useQuery<AppointmentApi[]>({
     queryKey: ["appointments"],
     queryFn: () =>
-      fetch(`${SERVER_HOST}/appointments`).then((res) => res.json()),
+      fetch(`${SERVER_HOST}/appointments`).then(async (res) => {
+        const json = await res.json();
+        if (!res.ok) {
+          throw new Error(json.message || "Error fetching appointments");
+        }
+        return json.data;
+      }),
   });
 
   const [pagination, setPagination] = useState({

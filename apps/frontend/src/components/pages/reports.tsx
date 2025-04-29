@@ -79,13 +79,27 @@ const ReportJobForm = () => {
     VoicebotApi[]
   >({
     queryKey: ["voicebots"],
-    queryFn: () => fetch(`${SERVER_HOST}/voicebots`).then((res) => res.json()),
+    queryFn: () =>
+      fetch(`${SERVER_HOST}/voicebots`).then(async (res) => {
+        const json = await res.json();
+        if (!res.ok) {
+          throw new Error(json.message || "Error fetching appointments");
+        }
+        return json.data;
+      }),
   });
   const { data: clinics = [], isLoading: loadingClinics } = useQuery<
     ClinicApi[]
   >({
     queryKey: ["clinics"],
-    queryFn: () => fetch(`${SERVER_HOST}/clinics`).then((res) => res.json()),
+    queryFn: () =>
+      fetch(`${SERVER_HOST}/clinics`).then(async (res) => {
+        const json = await res.json();
+        if (!res.ok) {
+          throw new Error(json.message || "Error fetching appointments");
+        }
+        return json.data;
+      }),
   });
 
   // Filter voicebots based on selected clinic
@@ -320,6 +334,9 @@ const ReportsTable = () => {
     queryFn: () =>
       fetch(`${SERVER_HOST}/reports`).then(async (res) => {
         const json = await res.json();
+        if (!res.ok) {
+          throw new Error(json.message || "Error fetching appointments");
+        }
         return json.data;
       }),
   });

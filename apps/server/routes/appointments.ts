@@ -60,7 +60,7 @@ router.get(
       const appointmentsWithClinicAndVoicebot = await db.appointments
         .aggregate<AppointmentApi>(makeAppointmentsPipeline(ownerId))
         .toArray();
-      res.status(200).json(appointmentsWithClinicAndVoicebot);
+      res.status(200).json({ data: appointmentsWithClinicAndVoicebot });
     } catch (error: any) {
       throw createError(500, "Error fetching appointments");
     }

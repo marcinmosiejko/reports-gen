@@ -17,7 +17,7 @@ router.get(
       const voicebots = await db.voicebots
         .find({ clinicId: { $in: clinicIds } })
         .toArray();
-      res.status(200).json(voicebots);
+      res.status(200).json({ data: voicebots });
     } catch (err: any) {
       throw createError(500, "Error fetching voicebots");
     }
