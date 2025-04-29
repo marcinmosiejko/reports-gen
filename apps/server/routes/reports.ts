@@ -167,9 +167,7 @@ router.get(
       ownerId: new ObjectId(await getOwnerId()),
     });
     if (!job) throw createError(404, "Not found");
-    res
-      .status(200)
-      .json({ jobId, status: job.status, reportPath: job.reportPath });
+    res.status(200).json(job);
   })
 );
 
