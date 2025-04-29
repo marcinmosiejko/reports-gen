@@ -69,10 +69,15 @@ router.post(
 
       const jobStatusUrl = `/reports/${result.insertedId}`;
 
-      res.status(202).location(jobStatusUrl).json({
-        message: "Job scheduled successfully",
-        jobId: result.insertedId,
-      });
+      res
+        .status(202)
+        .location(jobStatusUrl)
+        .json({
+          message: "Job scheduled successfully",
+          data: {
+            jobId: result.insertedId,
+          },
+        });
     } catch (error) {
       if (error instanceof z.ZodError) {
         console.error("Validation error:", error.message);
@@ -129,7 +134,9 @@ router.get(
       ])
       .toArray();
 
-    res.status(200).json(jobs);
+    res.status(200).json({
+      data: jobs,
+    });
   })
 );
 
@@ -167,7 +174,7 @@ router.get(
       ownerId: new ObjectId(await getOwnerId()),
     });
     if (!job) throw createError(404, "Not found");
-    res.status(200).json(job);
+    res.status(200).json({ data: job });
   })
 );
 

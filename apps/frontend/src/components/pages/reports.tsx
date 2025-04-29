@@ -317,7 +317,11 @@ const PAGE_SIZE = 20;
 const ReportsTable = () => {
   const { isLoading, error, data } = useQuery<ReportJobApi[]>({
     queryKey: ["reports"],
-    queryFn: () => fetch(`${SERVER_HOST}/reports`).then((res) => res.json()),
+    queryFn: () =>
+      fetch(`${SERVER_HOST}/reports`).then(async (res) => {
+        const json = await res.json();
+        return json.data;
+      }),
   });
 
   const [pagination, setPagination] = useState({
